@@ -12,7 +12,7 @@ namespace EFC01.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = DESKTOP-M4KTLBQ; Database = ITI_Db; Trusted_Connection = True");
+            optionsBuilder.UseSqlServer("Server = DESKTOP-M4KTLBQ; Database = ITI_Db; Trusted_Connection = True; Encrypt = false; ");
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }

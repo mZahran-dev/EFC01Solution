@@ -1,4 +1,5 @@
 ﻿using EFC01.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFC01
 {
@@ -7,7 +8,7 @@ namespace EFC01
         static void Main(string[] args)
         {
             ITIDbContext dbContext = new ITIDbContext();
-           
+            dbContext.Database.Migrate();
 
 
         }
