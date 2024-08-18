@@ -8,7 +8,7 @@ namespace EFC01
         static void Main(string[] args)
         {
             ITIDbContext dbContext = new ITIDbContext();
-            dbContext.Database.Migrate();
+            //dbContext.Database.Migrate();
 
 
         }
