@@ -20,5 +20,6 @@ namespace EFC01.Context
         public DbSet<Stud_Course> StudCourses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<Course_Inst> course_Insts { get; set; }
     }
 }
