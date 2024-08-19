@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EFC01.ITI_DB_Schema
 {
     //mapping using DataAnnotation
-    [Table("Employees", Schema ="dbo")]
+    //[Table("Employees", Schema ="dbo")]
     internal class Student
     {
         
