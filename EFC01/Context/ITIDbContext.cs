@@ -14,6 +14,14 @@ namespace EFC01.Context
         {
             optionsBuilder.UseSqlServer("Server = DESKTOP-M4KTLBQ; Database = ITI_Db; Trusted_Connection = True; Encrypt = false; ");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //fluent APIS
+            modelBuilder.Entity<Student>()
+                        .Property("Address")
+                        .HasDefaultValue("Cairo");
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Topic> Topics { get; set; }
