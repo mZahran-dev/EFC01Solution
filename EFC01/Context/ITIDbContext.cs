@@ -17,10 +17,19 @@ namespace EFC01.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //fluent APIS
-            modelBuilder.Entity<Student>()
-                        .Property("Address")
-                        .HasDefaultValue("Cairo");
-            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<Student>()
+            //            .Property("Address")
+            //            .HasDefaultValue("Cairo");
+
+            // Mapping Department Table Using Fluent APIS
+
+            //modelBuilder.Entity<Department>().ToTable("Departments", "dbo");
+            //modelBuilder.Entity<Department>().HasKey("DeptID");
+            //modelBuilder.Entity<Department>()
+            //            .Property(D => D.ID)
+            //            .UseIdentityColumn(10, 5);
+
+
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
