@@ -17,70 +17,70 @@ namespace EFC01
             #region CRUD Operations
             using ITIDbContext dbContext = new ITIDbContext();
 
-            Student student = new Student()
-            {
-                FName = "mahmoud",
-                LName = "Ibrahim",
-                Address = "Cairo",
-                Age = 21,
-                Dep_Id = 1,
+            //Student student = new Student()
+            //{
+            //    FName = "mahmoud",
+            //    LName = "Ibrahim",
+            //    Address = "Cairo",
+            //    Age = 21,
+            //    Dep_Id = 1,
 
-            };
+            //};
 
-            var stud = (from s in dbContext.Students
-                       where s.ID == 2 
-                       select s).FirstOrDefault();
-            //dbContext.Add(student);
-            //dbContext.Set<Student>().Add(student);
-            //dbContext.Students.Add(student);
-            //dbContext.Students.Remove(stud);
+            //var stud = (from s in dbContext.Students
+            //           where s.ID == 2 
+            //           select s).FirstOrDefault();
+            ////dbContext.Add(student);
+            ////dbContext.Set<Student>().Add(student);
+            ////dbContext.Students.Add(student);
+            ////dbContext.Students.Remove(stud);
                 
-            Console.WriteLine(dbContext.Entry(student).State);
-            dbContext.SaveChanges();
+            //Console.WriteLine(dbContext.Entry(student).State);
+            //dbContext.SaveChanges();
 
-            Course course = new Course()
-            {
-                Name = ".Net",
-                Duration = 23,
-                Description = "c#",
-                Top_Id = 1,
+            //Course course = new Course()
+            //{
+            //    Name = ".Net",
+            //    Duration = 23,
+            //    Description = "c#",
+            //    Top_Id = 1,
 
-            };
-            dbContext.Add(course);
-            dbContext.SaveChanges();
+            //};
+            //dbContext.Add(course);
+            //dbContext.SaveChanges();
 
 
-            Department department = new Department() 
-            { 
-                Name = "cs",
-                HiringDate = DateTime.Now,
-                Ins_ID = 1,
-            };
+            //Department department = new Department() 
+            //{ 
+            //    Name = "cs",
+            //    HiringDate = DateTime.Now,
+            //    Ins_ID = 1,
+            //};
 
-            dbContext.Add(department);
-            dbContext.SaveChanges();
+            //dbContext.Add(department);
+            //dbContext.SaveChanges();
 
-            Instructor instructor = new Instructor()
-            {
-                Name = "omar",
-                Salary = 7000,
-                Bouns = 1000,
-                Address = "Cairo",
-                Dept_ID = 1,
-                HourRate = 100
-            };
-            dbContext.Add(instructor);
-            dbContext.SaveChanges();
+            //Instructor instructor = new Instructor()
+            //{
+            //    Name = "omar",
+            //    Salary = 7000,
+            //    Bouns = 1000,
+            //    Address = "Cairo",
+            //    Dept_ID = 1,
+            //    HourRate = 100
+            //};
+            //dbContext.Add(instructor);
+            //dbContext.SaveChanges();
 
-            Topic topic = new Topic()
-            {
-                Name = "Operating System"
-            };
-            dbContext.Add(topic);
-            dbContext.SaveChanges();
+            //Topic topic = new Topic()
+            //{
+            //    Name = "Operating System"
+            //};
+            //dbContext.Add(topic);
+            //dbContext.SaveChanges();
             #endregion
 
-
+            
 
 
         }

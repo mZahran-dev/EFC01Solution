@@ -4,6 +4,7 @@ using EFC01.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFC01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819221152_DropDeptId")]
+    partial class DropDeptId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +43,9 @@ namespace EFC01.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Top_Id")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -103,6 +109,9 @@ namespace EFC01.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Dept_ID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("HourRate")
                         .HasColumnType("decimal(18,2)");
 
@@ -151,9 +160,6 @@ namespace EFC01.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DepartmentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("FName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -162,8 +168,6 @@ namespace EFC01.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Students");
                 });
@@ -183,18 +187,6 @@ namespace EFC01.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Topics");
-                });
-
-            modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>
-                {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
-                        .WithMany("Student")
-                        .HasForeignKey("DepartmentID");
-                });
-
-            modelBuilder.Entity("EFC01.ITI_DB_Schema.Department", b =>
-                {
-                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }

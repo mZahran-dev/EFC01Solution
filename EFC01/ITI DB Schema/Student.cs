@@ -29,7 +29,13 @@ namespace EFC01.ITI_DB_Schema
 
         [Range(21, 50)]
         public int Age { get; set; }
-        public int Dep_Id { get; set; }
+
+        //[InverseProperty("Student")]
+        //[ForeignKey("DeptID")]
+        //public Department Department { get; set; }
+
+
+
 
         //[EmailAddress]
         //[DataType(DataType.EmailAddress)]
@@ -39,7 +45,7 @@ namespace EFC01.ITI_DB_Schema
 
         //[Phone]
         //[DataType(DataType.PhoneNumber)]    
-        
+
 
 
     }
