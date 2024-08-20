@@ -4,6 +4,7 @@ using EFC01.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFC01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820005122_AddOneToManyRelationInstructorDepartment")]
+    partial class AddOneToManyRelationInstructorDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace EFC01.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DepartmentID")
+                    b.Property<int>("DeptID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourRate")
@@ -115,7 +118,7 @@ namespace EFC01.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DeptID");
 
                     b.ToTable("Instructors");
                 });
@@ -194,9 +197,13 @@ namespace EFC01.Migrations
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
                 {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
+                    b.HasOne("EFC01.ITI_DB_Schema.Department", "Departments")
                         .WithMany("Instructors")
-                        .HasForeignKey("DepartmentID");
+                        .HasForeignKey("DeptID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departments");
                 });
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>

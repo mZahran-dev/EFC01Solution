@@ -4,6 +4,7 @@ using EFC01.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFC01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820005018_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,9 +103,6 @@ namespace EFC01.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DepartmentID")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("HourRate")
                         .HasColumnType("decimal(18,2)");
 
@@ -114,8 +114,6 @@ namespace EFC01.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("DepartmentID");
 
                     b.ToTable("Instructors");
                 });
@@ -192,13 +190,6 @@ namespace EFC01.Migrations
                     b.ToTable("Topics");
                 });
 
-            modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
-                {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
-                        .WithMany("Instructors")
-                        .HasForeignKey("DepartmentID");
-                });
-
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>
                 {
                     b.HasOne("EFC01.ITI_DB_Schema.Department", null)
@@ -220,8 +211,6 @@ namespace EFC01.Migrations
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Department", b =>
                 {
-                    b.Navigation("Instructors");
-
                     b.Navigation("Student");
                 });
 #pragma warning restore 612, 618

@@ -4,6 +4,7 @@ using EFC01.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFC01.Migrations
 {
     [DbContext(typeof(ITIDbContext))]
-    partial class ITIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820005212_AddOneToOneRelationInstructorDepartment")]
+    partial class AddOneToOneRelationInstructorDepartment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,11 +79,17 @@ namespace EFC01.Migrations
                     b.Property<DateTime>("HiringDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Ins_ID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Ins_ID")
+                        .IsUnique();
 
                     b.ToTable("Departments");
                 });
@@ -100,7 +109,7 @@ namespace EFC01.Migrations
                     b.Property<decimal>("Bouns")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DepartmentID")
+                    b.Property<int>("DeptID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourRate")
@@ -115,7 +124,7 @@ namespace EFC01.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("DepartmentID");
+                    b.HasIndex("DeptID");
 
                     b.ToTable("Instructors");
                 });
@@ -192,11 +201,26 @@ namespace EFC01.Migrations
                     b.ToTable("Topics");
                 });
 
+            modelBuilder.Entity("EFC01.ITI_DB_Schema.Department", b =>
+                {
+                    b.HasOne("EFC01.ITI_DB_Schema.Instructor", "instructor")
+                        .WithOne("Department")
+                        .HasForeignKey("EFC01.ITI_DB_Schema.Department", "Ins_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("instructor");
+                });
+
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
                 {
-                    b.HasOne("EFC01.ITI_DB_Schema.Department", null)
+                    b.HasOne("EFC01.ITI_DB_Schema.Department", "Departments")
                         .WithMany("Instructors")
-                        .HasForeignKey("DepartmentID");
+                        .HasForeignKey("DeptID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Departments");
                 });
 
             modelBuilder.Entity("EFC01.ITI_DB_Schema.Student", b =>
@@ -223,6 +247,12 @@ namespace EFC01.Migrations
                     b.Navigation("Instructors");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("EFC01.ITI_DB_Schema.Instructor", b =>
+                {
+                    b.Navigation("Department")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

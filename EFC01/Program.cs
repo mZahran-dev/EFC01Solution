@@ -34,7 +34,7 @@ namespace EFC01
             ////dbContext.Set<Student>().Add(student);
             ////dbContext.Students.Add(student);
             ////dbContext.Students.Remove(stud);
-                
+
             //Console.WriteLine(dbContext.Entry(student).State);
             //dbContext.SaveChanges();
 
@@ -78,6 +78,11 @@ namespace EFC01
             //};
             //dbContext.Add(topic);
             //dbContext.SaveChanges();
+
+            var ins = (from d in dbContext.Instructors
+                        where d.ID == 2
+                        select d).FirstOrDefault();
+            dbContext.Instructors.Remove(ins);
             #endregion
 
             
